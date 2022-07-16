@@ -1,0 +1,56 @@
+source:
+  key: drupal7
+  node_type: article
+  plugin: example_d7_article_entity
+
+destination:
+  default_bundle: article
+  plugin: entity:node
+
+dependencies:
+  enforced:
+    module:
+      - example_migrate_files
+
+migration_dependencies:
+  required:
+    - example_files
+    - example_media_image
+
+id: example_article
+label: Content type - Example Article
+migration_group: example
+migration_tags:
+  - article
+  - example
+
+process:
+  body:
+    plugin: iterator
+    process:
+      format:
+        default_value: filtered_html
+        plugin: default_value
+      summary: summary
+      value: value
+    source: body
+  changed: changed
+  created: created
+
+  field_article_image/target_id:
+    migration: example_media_image
+    no_stub: true
+    plugin: migration_lookup
+    source: field_article_image
+
+  path/alias: alias
+  path/pathauto:
+    default_value: false
+    plugin: default_value
+  promote: promote
+  status: status
+  sticky: sticky
+  title: title
+  uid:
+    default_value: 1
+    plugin: default_value
