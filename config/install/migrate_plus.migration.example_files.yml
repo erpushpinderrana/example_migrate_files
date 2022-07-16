@@ -1,0 +1,49 @@
+source:
+  plugin: example_d7_file
+  scheme: public
+  constants:
+    source_base_path: 'http://example.com'
+
+destination:
+  plugin: entity:file
+
+
+id: example_files
+label: Migrate D7 File to D9 File
+migration_tags:
+  - files
+  - article
+migration_group: example
+
+dependencies:
+  enforced:
+    module:
+      - example_migrate_files
+
+process:
+  filename: filename
+  filemime: filemime
+  created: timestamp
+  changed: timestamp
+  status: status
+
+  uid:
+    plugin: default_value
+    default_value: 1
+
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - filepath
+    -
+      plugin: urlencode
+
+  uri:
+    -
+      plugin: file_copy
+      source:
+        - '@source_full_path'
+        - uri
