@@ -1,0 +1,42 @@
+source:
+  plugin: example_d7_file
+  type: image
+  constants:
+    bundle: image
+    source_base_path: 'http://example.com'
+
+id: example_media_image
+label: Media - File to Media Image
+migration_tags:
+  - file
+  - media
+  - article
+migration_group: example
+
+destination:
+  plugin: entity:media
+
+migration_dependencies:
+  required:
+    - example_files
+
+dependencies:
+  enforced:
+    module:
+      - example_migrate_files
+
+process:
+  mid: fid
+  name: filename
+  bundle: constants/bundle
+  status: status
+  created: timestamp
+  changed: timestamp
+
+  uid:
+    plugin: default_value
+    default_value: 1
+
+  field_article_image/target_id: fid
+  field_article_image/alt: field_file_image_alt_text/0/value
+  field_article_image/title: field_file_image_title_text/0/value
