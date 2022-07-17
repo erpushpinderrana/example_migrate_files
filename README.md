@@ -55,7 +55,8 @@ drush migrate-rollback example_article --idlist=1234
 [notice] Rolled back 1 item - done with 'example_article'
 ```
 
-## Handy Drush Commands. The below examples are using fin because I'm using docksal locally.
+## Handy Drush Commands.
+The below examples are using fin because I'm using docksal locally.
 ```
 fin drush pmu example_migrate_files -y && fin drush en example_migrate_files -y
 ```
