@@ -59,22 +59,30 @@ drush migrate-rollback example_article --idlist=1234
 ```
 fin drush pmu example_migrate_files -y && fin drush en example_migrate_files -y
 ```
+```
 fin drush migrate-import example_files
 ```
+```
 fin drush migrate-reset example_files
+```
 ```
 fin drush migrate-rollback example_files
 ```
 ```
 fin drush migrate-import example_media_image
 ```
+```
 fin drush migrate-reset example_media_image
+```
 ```
 fin drush migrate-rollback example_media_image
 ```
+```
 fin db cli --db=default 'select * from migrate_map_example_files'
 ```
+```
 fin db cli --db=default 'select * from migrate_map_example_media_image'
+```
 ```
 fin db cli --db=default 'show tables'
 ```
